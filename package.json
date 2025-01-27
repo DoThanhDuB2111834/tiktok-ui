@@ -4,6 +4,8 @@
     "private": true,
     "dependencies": {
         "@babel/plugin-transform-private-property-in-object": "^7.25.9",
+        "classnames": "^2.5.1",
+        "clsx": "^2.1.1",
         "cra-template": "1.2.0",
         "customize-cra": "^1.0.0",
         "normalize.css": "^8.0.1",
