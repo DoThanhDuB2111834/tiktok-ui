@@ -4,16 +4,18 @@ import {
     faCircleXmark,
     faSpinner,
     faMagnifyingGlass,
+    faRegistered,
 } from '@fortawesome/free-solid-svg-icons';
-// import Tippy from '@tippyjs/react';
+import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import Tippy from '@tippyjs/react/headless';
+// import Tippy from '@tippyjs/react/headless';
 import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 import images from '@/assets/images';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import AccountItem from '@/components/AccountItem';
+import Button from '@/components/Button';
 
 function Header() {
     const [searchResults, setSearchResults] = useState([]);
@@ -60,7 +62,10 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
-                <div className={clsx(styles.actions)}></div>
+                <div className={clsx(styles.actions)}>
+                    <Button text>Log in</Button>
+                    <Button primary>Register</Button>
+                </div>
             </div>
         </header>
     );
