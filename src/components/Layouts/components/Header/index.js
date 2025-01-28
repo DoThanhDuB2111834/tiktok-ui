@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
     faMagnifyingGlass,
-    faRegistered,
+    faEllipsisVertical,
+    faEarthAsia,
+    faCircleQuestion,
+    faKeyboard,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react';
+// import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-// import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react/headless';
 import clsx from 'clsx';
 
 import styles from './Header.module.scss';
@@ -16,14 +18,25 @@ import images from '@/assets/images';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import AccountItem from '@/components/AccountItem';
 import Button from '@/components/Button';
+import Menu from '@/components/Popper/Menu';
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+];
 
 function Header() {
-    const [searchResults, setSearchResults] = useState([]);
-
-    useEffect(() => {
-        setSearchResults([1, 2]);
-    }, []);
-
     return (
         <header className={clsx(styles.wrapper)}>
             <div className={clsx(styles.inner)}>
@@ -32,7 +45,6 @@ function Header() {
                 </div>
                 <Tippy
                     interactive
-                    visible={searchResults.length > 0}
                     render={(attrs) => (
                         <div
                             className={clsx(styles.searchResult)}
@@ -65,6 +77,12 @@ function Header() {
                 <div className={clsx(styles.actions)}>
                     <Button text>Log in</Button>
                     <Button primary>Register</Button>
+                    <Menu items={MENU_ITEMS}>
+                        <button className={clsx(styles.moreButtons)}>
+                            <FontAwesomeIcon
+                                icon={faEllipsisVertical}></FontAwesomeIcon>
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>

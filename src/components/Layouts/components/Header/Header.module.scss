@@ -61,7 +61,7 @@
 .search,
 .searchResult {
     width: 361px;
-    z-index: 9999;
+    background-color: var(--white);
 }
 
 .searchTitle {
@@ -95,4 +95,16 @@
 
 .customBtn {
     color: blue;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.moreButtons {
+    font-size: 2rem;
+    margin-left: 24px;
+    background-color: transparent;
+    padding: 8px;
 }
