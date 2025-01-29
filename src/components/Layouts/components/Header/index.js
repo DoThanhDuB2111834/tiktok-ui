@@ -1,8 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
@@ -15,16 +12,15 @@ import {
 import clsx from 'clsx';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import HeadlessTippy from '@tippyjs/react/headless';
 
 import styles from './Header.module.scss';
 import images from '@/assets/images';
-import { Wrapper as PopperWrapper } from '@/components/Popper';
-import AccountItem from '@/components/AccountItem';
+
 import Button from '@/components/Button';
 import Menu from '@/components/Popper/Menu';
 import { UploadIcon } from '@/components/Icon';
 import Image from '@/components/Image';
+import Search from '../Search';
 
 const MENU_ITEMS = [
     {
@@ -86,37 +82,7 @@ function Header() {
                 <div className={clsx(styles.logo)}>
                     <img src={images.logo} alt='tiktok' />
                 </div>
-                <HeadlessTippy
-                    interactive
-                    render={(attrs) => (
-                        <div
-                            className={clsx(styles.searchResult)}
-                            tabIndex='-1'
-                            {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={clsx(styles.searchTitle)}>
-                                    account
-                                </h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}>
-                    <div className={clsx(styles.search)}>
-                        <input placeholder='search account and video' />
-                        <button className={clsx(styles.clear)}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon
-                            className={clsx(styles.loading)}
-                            icon={faSpinner}
-                        />
-                        <button className={clsx(styles.searchButton)}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <Search />
                 <div className={clsx(styles.actions)}>
                     {currentUser ? (
                         <>
@@ -145,7 +111,7 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={clsx(styles.userAvt)}
-                                src='https://p1-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/e7179a80746ed2dfcf9bdd5dbe0dc1a0.jpeg?lk3s=a5d48078&nonce=68981&refresh_token=cf9d3f74caf53aac71ba1db407cea34a&x-expires=1738141200&x-signature=sNphKTR2%2FIXq0oVl3mU7PgDRgmU%3D&shp=a5d48078&shcp=81f88b70'
+                                src='https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/e7179a80746ed2dfcf9bdd5dbe0dc1a0.jpeg?lk3s=a5d48078&nonce=68981&refresh_token=cf9d3f74caf53aac71ba1db407cea34a&x-expires=1738141200&x-signature=sNphKTR2%2FIXq0oVl3mU7PgDRgmU%3D&shp=a5d48078&shcp=81f88b70'
                                 alt='Đỗ Thanh Dũ'
                             />
                         ) : (
