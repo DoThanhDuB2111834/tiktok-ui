@@ -15,6 +15,7 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
@@ -28,8 +29,26 @@ function Search() {
     };
 
     useEffect(() => {
-        setSearchResult([1, 2]);
-    }, []);
+        if (searchValue.trim() !== '') {
+            setLoading(true);
+            fetch(
+                `https://jsonplaceholder.typicode.com/users?q=${encodeURIComponent(
+                    searchValue
+                )}`
+            )
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+
+                    if (response) {
+                        setSearchResult(response);
+                    }
+
+                    setLoading(false);
+                })
+                .catch((err) => console.error(err));
+        }
+    }, [searchValue]);
 
     return (
         <HeadlessTippy
@@ -43,9 +62,9 @@ function Search() {
                     {...attrs}>
                     <PopperWrapper>
                         <h4 className={clsx(styles.searchTitle)}>account</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((user) => (
+                            <AccountItem key={user.id} data={user} />
+                        ))}
                     </PopperWrapper>
                 </div>
             )}>
@@ -57,7 +76,7 @@ function Search() {
                     onChange={(e) => setSearchValue(e.target.value)}
                     onFocus={() => setShowResult(true)}
                 />
-                {!!searchValue && (
+                {searchValue && !loading && (
                     <button
                         className={clsx(styles.clear)}
                         onClick={handleClear}>
@@ -65,10 +84,12 @@ function Search() {
                     </button>
                 )}
 
-                {/* <FontAwesomeIcon
-                    className={clsx(styles.loading)}
-                    icon={faSpinner}
-                /> */}
+                {loading && (
+                    <FontAwesomeIcon
+                        className={clsx(styles.loading)}
+                        icon={faSpinner}
+                    />
+                )}
                 <button className={clsx(styles.searchButton)}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
