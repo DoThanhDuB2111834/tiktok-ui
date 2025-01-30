@@ -10,6 +10,7 @@ import AccountItem from '@/components/AccountItem';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import styles from './Search.module.scss';
 import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from '@/hooks';
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
@@ -18,6 +19,8 @@ function Search() {
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
+
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const handleClear = () => {
         setSearchValue('');
@@ -29,11 +32,11 @@ function Search() {
     };
 
     useEffect(() => {
-        if (searchValue.trim() !== '') {
+        if (debouncedValue.trim() !== '') {
             setLoading(true);
             fetch(
                 `https://jsonplaceholder.typicode.com/users?q=${encodeURIComponent(
-                    searchValue
+                    debouncedValue
                 )}`
             )
                 .then((response) => response.json())
@@ -47,8 +50,10 @@ function Search() {
                     setLoading(false);
                 })
                 .catch((err) => console.error(err));
+        } else {
+            setSearchResult([]);
         }
-    }, [searchValue]);
+    }, [debouncedValue]);
 
     return (
         <HeadlessTippy
