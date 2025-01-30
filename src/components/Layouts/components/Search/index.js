@@ -31,32 +31,44 @@ function Search() {
         setShowResult(false);
     };
 
-    useEffect(() => {
-        if (debouncedValue.trim() !== '') {
-            setLoading(true);
-            fetch(
-                `https://jsonplaceholder.typicode.com/users?q=${encodeURIComponent(
-                    debouncedValue
-                )}`
-            )
-                .then((response) => response.json())
-                .then((response) => {
-                    console.log(response);
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
 
-                    if (response) {
-                        setSearchResult(response);
-                    }
-
-                    setLoading(false);
-                })
-                .catch((err) => console.error(err));
-        } else {
-            setSearchResult([]);
+        if (searchValue.startsWith(' ')) {
+            return;
         }
+
+        setSearchValue(searchValue);
+    };
+
+    useEffect(() => {
+        if (debouncedValue.trim() === '') {
+            setSearchResult([]);
+            return;
+        }
+
+        setLoading(true);
+        fetch(
+            `https://jsonplaceholder.typicode.com/users?q=${encodeURIComponent(
+                debouncedValue
+            )}`
+        )
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+
+                if (response) {
+                    setSearchResult(response);
+                }
+
+                setLoading(false);
+            })
+            .catch((err) => console.error(err));
     }, [debouncedValue]);
 
     return (
         <HeadlessTippy
+            appendTo={document.body}
             visible={showResult && searchResult.length > 0}
             onClickOutside={handleHideResult}
             interactive
@@ -78,7 +90,7 @@ function Search() {
                     ref={inputRef}
                     placeholder='search account and video'
                     value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {searchValue && !loading && (

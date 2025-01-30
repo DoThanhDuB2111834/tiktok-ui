@@ -1,5 +1,7 @@
 .menuList {
     width: 280px;
+    height: 200px;
+    display: flex;
     .menuItem {
         font-size: 1.1rem;
         margin-left: 0;
@@ -15,10 +17,15 @@
     }
 }
 
+.menuBody {
+    overflow-y: auto;
+}
+
 // Header
 .header {
     position: relative;
     height: 50px;
+    flex-shrink: 0;
 }
 .backBtn {
     width: 50px;

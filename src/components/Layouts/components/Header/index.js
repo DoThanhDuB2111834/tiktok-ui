@@ -12,6 +12,7 @@ import {
 import clsx from 'clsx';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
+import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import images from '@/assets/images';
@@ -21,6 +22,7 @@ import Menu from '@/components/Popper/Menu';
 import { UploadIcon } from '@/components/Icon';
 import Image from '@/components/Image';
 import Search from '../Search';
+import routes from '@/Config/route';
 
 const MENU_ITEMS = [
     {
@@ -32,6 +34,46 @@ const MENU_ITEMS = [
                 {
                     code: 'en',
                     title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'thai',
+                    title: 'Thailand',
+                },
+                {
+                    code: 'china',
+                    title: 'Ch',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    code: 'vi',
+                    title: 'Vietnamese',
                 },
                 {
                     code: 'vi',
@@ -80,7 +122,9 @@ function Header() {
         <header className={clsx(styles.wrapper)}>
             <div className={clsx(styles.inner)}>
                 <div className={clsx(styles.logo)}>
-                    <img src={images.logo} alt='tiktok' />
+                    <Link to={routes.home}>
+                        <img src={images.logo} alt='tiktok' />
+                    </Link>
                 </div>
                 <Search />
                 <div className={clsx(styles.actions)}>

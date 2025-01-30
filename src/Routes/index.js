@@ -1,4 +1,5 @@
 import { HeaderOnly } from '@/components/Layouts';
+import routesConfig from '@/Config/route';
 
 import Home from '@/pages/Home';
 import Following from '@/pages/Following';
@@ -6,15 +7,15 @@ import Upload from '@/pages/Uploads';
 
 const publicRoutes = [
     {
-        path: '/',
+        path: routesConfig.home,
         component: Home,
     },
     {
-        path: '/following',
+        path: routesConfig.follwing,
         component: Following,
     },
     {
-        path: '/upload',
+        path: routesConfig.upload,
         component: Upload,
         layout: HeaderOnly,
     },
